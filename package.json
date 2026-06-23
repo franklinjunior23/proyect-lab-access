@@ -1,0 +1,18 @@
+{
+  "name": "labgate",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "back": "pnpm --filter back dev",
+    "ui": "pnpm --filter ui dev",
+    "dev": "pnpm --parallel --filter \"./app/*\" dev",
+    "format": "pnpm --filter back format && pnpm --filter ui format",
+    "test": "pnpm --filter back test",
+    "test:e2e": "pnpm --filter back test:e2e",
+    "simulate": "pnpm --filter back simulate"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  }
+}

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+
+# Cliente Prisma generado
+src/generated/
+
+# Bases de datos SQLite
+*.db
+*.db-shm
+*.db-wal
