@@ -36,9 +36,9 @@ PIN_ECHO = 2
 # --- Tiempos (en milisegundos salvo indicación) ---
 SERVO_ANGULO_ABIERTO  = 90   # grados
 SERVO_ANGULO_CERRADO  = 0    # grados
-PUERTA_TIEMPO_ABIERTA = 4000 # ms que permanece abierta tras acceso concedido
-PUERTA_ALERTA_CM      = 20   # si el sensor detecta < X cm → puerta sigue abierta
-PUERTA_ALERTA_TIEMPO  = 10   # segundos antes de emitir alerta de puerta abierta
+PUERTA_ESPERA_ENTRADA_MS = 5000  # ms máximos esperando que la persona cruce tras abrir
+PUERTA_ALERTA_CM         = 20   # distancia en cm para detectar persona en el umbral
+PUERTA_ALERTA_TIEMPO     = 10   # segundos antes de emitir alerta de persona bloqueando
 BUZZER_CORTO_MS       = 150  # beep de acceso concedido
 BUZZER_LARGO_MS       = 600  # beep de acceso denegado
 
