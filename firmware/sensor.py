@@ -11,8 +11,8 @@ from config import PIN_TRIG, PIN_ECHO, PUERTA_ALERTA_CM
 _trig = Pin(PIN_TRIG, Pin.OUT)
 _echo = Pin(PIN_ECHO, Pin.IN)
 
-# Timeout en µs equivalente a ~40 cm (evita que el loop quede colgado)
-_TIMEOUT_US = 23200
+# Tiempo límite en µs equivalente a ~40 cm (evita que el loop quede colgado)
+_TIEMPO_LIMITE_US = 23200
 
 
 def medir_distancia_cm():
@@ -30,13 +30,13 @@ def medir_distancia_cm():
     # Espera que el eco suba a HIGH
     inicio = ticks_us()
     while _echo.value() == 0:
-        if ticks_diff(ticks_us(), inicio) > _TIMEOUT_US:
+        if ticks_diff(ticks_us(), inicio) > _TIEMPO_LIMITE_US:
             return None
 
     # Mide cuánto tiempo permanece HIGH el eco
     subida = ticks_us()
     while _echo.value() == 1:
-        if ticks_diff(ticks_us(), subida) > _TIMEOUT_US:
+        if ticks_diff(ticks_us(), subida) > _TIEMPO_LIMITE_US:
             return None
     bajada = ticks_us()
 

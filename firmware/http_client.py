@@ -19,25 +19,25 @@ def validar_acceso(uid):
         dict con {"granted": bool, "description": str}
         o None si la petición falló.
     """
-    url     = API_URL + "/access"
-    payload = ujson.dumps({"uid": uid})
-    headers = {"Content-Type": "application/json"}
+    url      = API_URL + "/access"
+    cuerpo   = ujson.dumps({"uid": uid})
+    cabeceras = {"Content-Type": "application/json"}
 
     try:
-        response = urequests.post(url, data=payload, headers=headers)
+        respuesta = urequests.post(url, data=cuerpo, headers=cabeceras)
 
-        if response.status_code == 200 or response.status_code == 201:
-            datos = response.json()
-            response.close()
+        if respuesta.status_code == 200 or respuesta.status_code == 201:
+            datos = respuesta.json()
+            respuesta.close()
 
             # Extraer el resultado del log que devuelve el backend
-            granted     = datos.get("granted", False)
+            concedido   = datos.get("granted", False)
             descripcion = datos.get("log", {}).get("description", "")
-            return {"granted": granted, "description": descripcion}
+            return {"granted": concedido, "description": descripcion}
         else:
-            response.close()
+            respuesta.close()
             return None
 
-    except Exception as e:
-        print("Error HTTP:", e)
+    except Exception as error:
+        print("Error HTTP:", error)
         return None

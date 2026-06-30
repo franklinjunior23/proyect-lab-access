@@ -6,8 +6,8 @@ import network
 from utime import sleep_ms, ticks_ms, ticks_diff
 from config import WIFI_SSID, WIFI_PASSWORD
 
-_TIMEOUT_MS   = 15000  # tiempo máximo de espera para conectar
-_INTERVALO_MS = 500    # intervalo entre comprobaciones de estado
+_TIEMPO_LIMITE_MS = 15000  # tiempo máximo de espera para conectar
+_INTERVALO_MS     = 500    # intervalo entre comprobaciones de estado
 
 
 def conectar_wifi():
@@ -17,27 +17,27 @@ def conectar_wifi():
     Returns:
         True si la conexión fue exitosa, False si se agotó el tiempo.
     """
-    wlan = network.WLAN(network.STA_IF)
-    wlan.active(True)
+    red_wifi = network.WLAN(network.STA_IF)
+    red_wifi.active(True)
 
-    if wlan.isconnected():
-        print("WiFi ya conectado:", wlan.ifconfig()[0])
+    if red_wifi.isconnected():
+        print("WiFi ya conectado:", red_wifi.ifconfig()[0])
         return True
 
     print("Conectando a WiFi:", WIFI_SSID)
-    wlan.connect(WIFI_SSID, WIFI_PASSWORD)
+    red_wifi.connect(WIFI_SSID, WIFI_PASSWORD)
 
     inicio = ticks_ms()
-    while not wlan.isconnected():
-        if ticks_diff(ticks_ms(), inicio) > _TIMEOUT_MS:
+    while not red_wifi.isconnected():
+        if ticks_diff(ticks_ms(), inicio) > _TIEMPO_LIMITE_MS:
             print("Timeout: no se pudo conectar al WiFi")
             return False
 
         print(".")
         sleep_ms(_INTERVALO_MS)
 
-    ip = wlan.ifconfig()[0]
-    print("Conectado. IP:", ip)
+    direccion_ip = red_wifi.ifconfig()[0]
+    print("Conectado. IP:", direccion_ip)
     return True
 
 
@@ -48,9 +48,9 @@ def validar_conexion():
     Returns:
         True si hay conexión activa, False si se perdió.
     """
-    wlan = network.WLAN(network.STA_IF)
+    red_wifi = network.WLAN(network.STA_IF)
 
-    if wlan.isconnected():
+    if red_wifi.isconnected():
         return True
 
     print("Conexión WiFi perdida. Reconectando...")
